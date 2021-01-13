@@ -15,10 +15,11 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
+find_package(sensor_msgs REQUIRED)
 find_package(visualization_msgs REQUIRED)
 
 # Custom msg/srv 
-rosidl_generate_interfaces(${PROJECT_NAME} "msg/JointState.msg")
+rosidl_generate_interfaces(${PROJECT_NAME} "msg/EEF.msg")
 ament_export_dependencies(rosidl_default_runtime)
 
 add_library(arm_component SHARED
@@ -30,7 +31,7 @@ add_library(arm_component SHARED
 
 rclcpp_components_register_nodes(arm_component "simple_arm::SimpleArm")
 
-ament_target_dependencies(arm_component rclcpp rclcpp_components visualization_msgs)
+ament_target_dependencies(arm_component rclcpp rclcpp_components sensor_msgs visualization_msgs)
 
 rosidl_target_interfaces(arm_component ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
